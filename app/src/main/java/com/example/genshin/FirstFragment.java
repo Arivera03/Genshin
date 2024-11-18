@@ -27,6 +27,7 @@ public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
     private ArrayList<Personaje> pjs = new ArrayList<>();
+    private ArrayAdapter<Personaje> adapter;
 
     @Override
     public View onCreateView(
@@ -35,6 +36,8 @@ public class FirstFragment extends Fragment {
     ) {
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);
+        adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,pjs);
+        binding.listaPersonajes.setAdapter(adapter);
         return binding.getRoot();
 
     }
@@ -58,6 +61,7 @@ public class FirstFragment extends Fragment {
                     if (Personaje != null) {
                         getActivity().runOnUiThread(() -> {
                             pjs.add(Personaje);
+                            adapter.add(Personaje);
                             llamarPjs(id + 1, uid);
                         });
                     } else {

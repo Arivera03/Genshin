@@ -1,10 +1,19 @@
 package com.example.genshin;
 
-public class Personaje {
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class Personaje implements Serializable {
+    @SerializedName("Nombre")
     public String nombre;
+    @SerializedName("id")
     public int ID;
+    @SerializedName("Elemento")
     public String elemento;
+    @SerializedName("TipoArma")
     public String tipoarma;
+    @SerializedName("Rareza")
     public int rareza;
 
     public Personaje(){

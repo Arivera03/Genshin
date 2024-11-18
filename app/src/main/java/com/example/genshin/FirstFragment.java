@@ -26,8 +26,8 @@ import com.example.genshin.databinding.FragmentFirstBinding;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
-    private ArrayList<Personaje> pjs = new ArrayList<>();
-    private ArrayAdapter<Personaje> adapter;
+    private ArrayList<String> pjs = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
 
     @Override
     public View onCreateView(
@@ -60,8 +60,7 @@ public class FirstFragment extends Fragment {
                 metodospjs.getPersonaje((id), Personaje -> {
                     if (Personaje != null) {
                         getActivity().runOnUiThread(() -> {
-                            pjs.add(Personaje);
-                            adapter.add(Personaje);
+                            adapter.add(Personaje.getNombre());
                             llamarPjs(id + 1, uid);
                         });
                     } else {

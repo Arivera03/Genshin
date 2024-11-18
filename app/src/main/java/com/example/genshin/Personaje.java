@@ -2,7 +2,7 @@ package com.example.genshin;
 
 public class Personaje {
     public String nombre;
-    public int id;
+    public int ID;
     public String elemento;
     public String tipoarma;
     public int rareza;
@@ -13,7 +13,7 @@ public class Personaje {
 
     public Personaje(String n, int id, String e, String ta, int r){
         this.nombre = n;
-        this.id = id;
+        this.ID = id;
         this.elemento = e;
         this.tipoarma = ta;
         this.rareza = r;
@@ -27,12 +27,12 @@ public class Personaje {
         this.nombre = nombre;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getElemento() {

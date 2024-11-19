@@ -26,8 +26,8 @@ import com.example.genshin.databinding.FragmentFirstBinding;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
-    private ArrayList<String> pjs = new ArrayList<>();
-    private ArrayAdapter<String> adapter;
+    private ArrayList<Personaje> pjs = new ArrayList<>();
+    private ArrayAdapter<Personaje> adapter;
 
     @Override
     public View onCreateView(
@@ -36,7 +36,8 @@ public class FirstFragment extends Fragment {
     ) {
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);
-        adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,pjs);
+        pjs = new ArrayList<>();
+        adapter = new adaptador(getContext(), R.layout.fragment_listapag1_personajes_genshin,pjs);
         binding.listaPersonajes.setAdapter(adapter);
         return binding.getRoot();
 
@@ -47,7 +48,15 @@ public class FirstFragment extends Fragment {
 
         int id = 1;
         int ultimaid = 88;
-        llamarPjs(id, ultimaid);
+//        binding.listaPersonajes.setOnItemClickListener((adapter, fragment, i, l) -> {
+//            Personaje pj = (Personaje) adapter.getItemAtPosition(i);
+//            Bundle args = new Bundle();
+//            args.putSerializable("item", pj);
+//
+//            NavHostFragment.findNavController(FirstFragment.this)
+//                    .navigate(R.id.action_FirstFragment_to_SecondFragment, args);
+//        });
+//        llamarPjs(id, ultimaid);
     }
     private void llamarPjs(int id, int uid) {
         if (id > uid){
@@ -60,7 +69,8 @@ public class FirstFragment extends Fragment {
                 metodospjs.getPersonaje((id), Personaje -> {
                     if (Personaje != null) {
                         getActivity().runOnUiThread(() -> {
-                            adapter.add(Personaje.getNombre());
+                            pjs.add(Personaje);
+                            adapter.notifyDataSetChanged();
                             llamarPjs(id + 1, uid);
                         });
                     } else {

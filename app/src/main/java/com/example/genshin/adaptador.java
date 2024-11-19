@@ -29,9 +29,9 @@ public class adaptador extends ArrayAdapter<Personaje> {
 
         nombrepj.setText(personaje.getNombre());
         if (personaje.getRareza() == 4){
-            rarezapj.setText(personaje.getRareza() + "⭐⭐⭐⭐");
+            rarezapj.setText(personaje.getRareza() + " ⭐⭐⭐⭐");
         } else {
-            rarezapj.setText(personaje.getRareza() + "⭐⭐⭐⭐⭐");
+            rarezapj.setText(personaje.getRareza() + " ⭐⭐⭐⭐⭐");
         }
         return convertView;
     }

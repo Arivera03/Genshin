@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class adaptador extends ArrayAdapter<Personaje> {
@@ -33,6 +36,8 @@ public class adaptador extends ArrayAdapter<Personaje> {
         } else {
             rarezapj.setText(personaje.getRareza() + " ⭐⭐⭐⭐⭐");
         }
+        String urlicono = personaje.getIcono();
+        Glide.with(getContext()).load(urlicono).into(fotopj);
         return convertView;
     }
 }

@@ -15,6 +15,9 @@ public class Personaje implements Serializable {
     public String tipoarma;
     @SerializedName("Rareza")
     public int rareza;
+    @SerializedName("Icono")
+    public String icono;
+
 
     public Personaje(){
 
@@ -26,6 +29,14 @@ public class Personaje implements Serializable {
         this.elemento = e;
         this.tipoarma = ta;
         this.rareza = r;
+    }
+
+    public String getIcono() {
+        return icono;
+    }
+
+    public void setIcono(String icono) {
+        this.icono = icono;
     }
 
     public String getNombre() {

@@ -28,6 +28,7 @@ public class FirstFragment extends Fragment {
     private FragmentFirstBinding binding;
     private ArrayList<Personaje> pjs = new ArrayList<>();
     private ArrayAdapter<Personaje> adapter;
+    private boolean generar = true;
 
     @Override
     public View onCreateView(
@@ -45,18 +46,19 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        int id = 1;
-        int ultimaid = 88;
-//        binding.listaPersonajes.setOnItemClickListener((adapter, fragment, i, l) -> {
-//            Personaje pj = (Personaje) adapter.getItemAtPosition(i);
-//            Bundle args = new Bundle();
-//            args.putSerializable("item", pj);
-//
-//            NavHostFragment.findNavController(FirstFragment.this)
-//                    .navigate(R.id.action_FirstFragment_to_SecondFragment, args);
-//        });
+        generar = true;
+        int id = 1;     // empezará desde la id 1
+        int ultimaid = 88;      // y terminará al generar la id 88
         llamarPjs(id, ultimaid);
+        binding.listaPersonajes.setOnItemClickListener((adapter, fragment, i, l) -> {
+            Personaje pj = (Personaje) adapter.getItemAtPosition(i);
+            Bundle args = new Bundle();
+            args.putSerializable("item", pj);
+            generar = false;
+
+            NavHostFragment.findNavController(FirstFragment.this)
+                    .navigate(R.id.action_FirstFragment_to_SecondFragment, args);
+        });
     }
     private void llamarPjs(int id, int uid) {
         if (id > uid){
@@ -66,14 +68,16 @@ public class FirstFragment extends Fragment {
 
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.execute(() -> {
-                metodospjs.getPersonaje((id), Personaje -> {
-                    if (Personaje != null) {
+                metodospjs.getPersonaje((id), Personaje -> {    // Usamos el metodo para obtener a los personajes por su id
+                    if (Personaje != null) {    //  Si el personaje que agarra no es null entonces genera el personaje
                         getActivity().runOnUiThread(() -> {
-                            pjs.add(Personaje);
-                            adapter.notifyDataSetChanged();
-                            llamarPjs(id + 1, uid);
+                            pjs.add(Personaje);     // Añadimos a la lista de personajes el personaje por la id que agarre
+                            adapter.notifyDataSetChanged(); // Notificamos al adaptador de que la array se ha modificado
+                            if (generar){
+                                llamarPjs(id + 1, uid);     //  Usamos recursividad
+                            }
                         });
-                    } else {
+                    } else {    // Si no saltará un error y te notificará la id que ha fallado
                         getActivity().runOnUiThread(() ->
                                 Toast.makeText(getContext(), "Error al cargar el Pokémon con ID " + id, Toast.LENGTH_SHORT).show()
                         );

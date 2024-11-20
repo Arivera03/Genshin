@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.bumptech.glide.Glide;
 import com.example.genshin.databinding.FragmentSecondBinding;
 
 public class SecondFragment extends Fragment {
@@ -33,16 +34,26 @@ public class SecondFragment extends Fragment {
         Bundle args = getArguments();
 
         if(args != null) {
-            Personaje pokemon = (Personaje) args.getSerializable("item");
+            Personaje personaje = (Personaje) args.getSerializable("item");
 
-            if (pokemon != null) {
-                //updateUi(pokemon);
+            if (personaje != null) {
+                actualizarinfo(personaje);
             }
         }
     }
     private void actualizarinfo(Personaje personaje) {
         Log.d("infopjs", personaje.toString());
 
+        binding.detPersonajeNombre.setText(personaje.getNombre());
+        binding.detPersonajeElemento.setText(personaje.getElemento());
+        binding.detPersonajeTipoArma.setText(personaje.getTipoarma());
+        if (personaje.getRareza() == 4){
+            binding.detPersonajeRareza.setText("⭐⭐⭐⭐");
+        } else {
+            binding.detPersonajeRareza.setText("⭐⭐⭐⭐⭐");
+        }
+        String urlImagenGacha = personaje.getImgGacha();
+        Glide.with(getContext()).load(urlImagenGacha).into(binding.detPersonajeImagen);
     }
 
     @Override

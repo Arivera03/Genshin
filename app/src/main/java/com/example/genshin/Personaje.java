@@ -1,13 +1,17 @@
 package com.example.genshin;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-
+@Entity
 public class Personaje implements Serializable {
     @SerializedName("Nombre")
     public String nombre;
     @SerializedName("id")
+    @PrimaryKey(autoGenerate = true)
     public int ID;
     @SerializedName("Elemento")
     public String elemento;

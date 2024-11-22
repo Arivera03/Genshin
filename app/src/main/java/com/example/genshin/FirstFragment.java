@@ -72,6 +72,8 @@ public class FirstFragment extends Fragment {
                     if (Personaje != null) {    //  Si el personaje que agarra no es null entonces genera el personaje
                         getActivity().runOnUiThread(() -> {
                             pjs.add(Personaje);     // Añadimos a la lista de personajes el personaje por la id que agarre
+                            PersonajeDAO cositas;
+                            //cositas.anadirpjs(pjs);
                             adapter.notifyDataSetChanged(); // Notificamos al adaptador de que la array se ha modificado
                             if (generar){
                                 llamarPjs(id + 1, uid);     //  Usamos recursividad

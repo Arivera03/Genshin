@@ -68,6 +68,18 @@ public class SecondFragment extends Fragment {
 
         if (binding.detPersonajeElemento.getText().equals("Pyro")){
             Glide.with(getContext()).load(R.drawable.pyro).into(binding.detImagenElemento);
+        } else if (binding.detPersonajeElemento.getText().equals("Anemo")){
+            Glide.with(getContext()).load(R.drawable.anemo).into(binding.detImagenElemento);
+        } else if (binding.detPersonajeElemento.getText().equals("Cryo")){
+            Glide.with(getContext()).load(R.drawable.cryo).into(binding.detImagenElemento);
+        } else if (binding.detPersonajeElemento.getText().equals("Dendro")){
+            Glide.with(getContext()).load(R.drawable.dendro).into(binding.detImagenElemento);
+        } else if (binding.detPersonajeElemento.getText().equals("Electro")){
+            Glide.with(getContext()).load(R.drawable.electro).into(binding.detImagenElemento);
+        } else if (binding.detPersonajeElemento.getText().equals("Geo")) {
+            Glide.with(getContext()).load(R.drawable.geo).into(binding.detImagenElemento);
+        } else if (binding.detPersonajeElemento.getText().equals("Hydro")) {
+            Glide.with(getContext()).load(R.drawable.hydro).into(binding.detImagenElemento);
         }
 
     }

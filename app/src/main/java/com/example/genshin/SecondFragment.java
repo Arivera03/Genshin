@@ -54,6 +54,22 @@ public class SecondFragment extends Fragment {
         }
         String urlImagenGacha = personaje.getImgGacha();
         Glide.with(getContext()).load(urlImagenGacha).into(binding.detPersonajeImagen);
+        if (binding.detPersonajeTipoArma.getText().equals("Espada Ligera")){
+            Glide.with(getContext()).load(R.drawable.iconoespadaligera).into(binding.detImagenTipoArma);
+        } else if (binding.detPersonajeTipoArma.getText().equals("Arco")){
+            Glide.with(getContext()).load(R.drawable.arco).into(binding.detImagenTipoArma);
+        } else if(binding.detPersonajeTipoArma.getText().equals("Lanza")){
+            Glide.with(getContext()).load(R.drawable.lanza).into(binding.detImagenTipoArma);
+        } else if(binding.detPersonajeTipoArma.getText().equals("Mandoble")){
+            Glide.with(getContext()).load(R.drawable.mandoble).into(binding.detImagenTipoArma);
+        } else if (binding.detPersonajeTipoArma.getText().equals("Catalizador")){
+            Glide.with(getContext()).load(R.drawable.catalizador).into(binding.detImagenTipoArma);
+        }
+
+        if (binding.detPersonajeElemento.getText().equals("Pyro")){
+            Glide.with(getContext()).load(R.drawable.pyro).into(binding.detImagenElemento);
+        }
+
     }
 
     @Override

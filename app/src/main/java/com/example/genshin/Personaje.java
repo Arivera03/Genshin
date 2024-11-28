@@ -24,7 +24,7 @@ public class Personaje implements Serializable {
     @SerializedName("Imagen")
     public String imgGacha;
     @SerializedName("Descripcion")
-    public String desc;
+    public String Descripcion;
 
 
     public Personaje(){
@@ -40,11 +40,11 @@ public class Personaje implements Serializable {
     }
 
     public String getDesc() {
-        return desc;
+        return Descripcion;
     }
 
     public void setDesc(String desc) {
-        this.desc = desc;
+        this.Descripcion = desc;
     }
 
     public String getImgGacha() {

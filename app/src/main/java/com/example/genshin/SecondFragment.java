@@ -81,7 +81,7 @@ public class SecondFragment extends Fragment {
         } else if (binding.detPersonajeElemento.getText().equals("Hydro")) {
             Glide.with(getContext()).load(R.drawable.hydro).into(binding.detImagenElemento);
         }
-
+        binding.detPersonajeDesc.setText(personaje.getDesc());
     }
 
     @Override

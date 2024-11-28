@@ -54,15 +54,15 @@ dependencies {
     val arch_version = "2.1.0"
 
     // ViewModel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
+    implementation (libs.androidx.lifecycle.viewmodel)
     // LiveData
-    implementation ("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
+    implementation (libs.androidx.lifecycle.livedata)
     // Annotation processor
     // alternately - if using Java8, use the following instead of lifecycle-compiler
-    implementation ("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
+    implementation (libs.lifecycle.common.java8)
 
     val room_version = "2.4.3"
 
-    implementation ("androidx.room:room-runtime:$room_version")
-    annotationProcessor ("androidx.room:room-compiler:$room_version")
+    implementation (libs.room.runtime)
+    annotationProcessor (libs.room.compiler)
 }

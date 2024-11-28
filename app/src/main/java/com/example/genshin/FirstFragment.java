@@ -52,15 +52,10 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         AppDatabase db = AppDatabase.getDatabase(getContext());
 
-        db.getPersonajeDao().getPersonajes().observe(getViewLifecycleOwner(), new Observer<List<Personaje>>() {
-            @Override
-            public void onChanged(List<Personaje> personajes) {
-                // Cuando los datos cambian (es decir, cuando se obtienen los personajes)
-                // Actualizamos la lista de personajes
-                pjs.clear();  // Limpiamos la lista para evitar duplicados
-                pjs.addAll(personajes);  // Añadimos todos los personajes obtenidos
-                adapter.notifyDataSetChanged();  // Notificamos al adaptador que la lista ha cambiado
-            }
+        db.getPersonajeDao().getPersonajes().observe(getViewLifecycleOwner(), personajes -> {   // Cuando los datos cambian (es decir, cuando se obtienen los personajes)
+            pjs.clear();  // Limpiamos la lista para evitar duplicados
+            pjs.addAll(personajes);  // Añadimos todos los personajes que tienen
+            adapter.notifyDataSetChanged();  // Le notificamos al adaptador que la lista ha cambiado
         });
 
         binding.listaPersonajes.setOnItemClickListener((adapter, fragment, i, l) -> {
@@ -74,35 +69,35 @@ public class FirstFragment extends Fragment {
         });
     }
 
-    private void llamarPjs(int id, int uid) {
-        if (id > uid) {
-            Toast.makeText(getContext(), "Generado", Toast.LENGTH_SHORT).show();
-        } else {
-            MetodosPjs metodospjs = new MetodosPjs();
-
-            ExecutorService executor = Executors.newSingleThreadExecutor();
-            executor.execute(() -> {
-                metodospjs.getPersonaje((id), personaje -> {    // Usamos el metodo para obtener a los personajes por su id
-                    if (personaje != null) { //  Si el personaje que agarra no es null entonces genera el personaje
-                        ExecutorService executordb = Executors.newSingleThreadExecutor();
-                        executordb.execute(() -> {
-                            getActivity().runOnUiThread(() -> {
-                                pjs.add(personaje);     // Añadimos a la lista de personajes el personaje por la id que agarre
-                                adapter.notifyDataSetChanged(); // Notificamos al adaptador de que la array se ha modificado
-                                if (generar) {
-                                    llamarPjs(id + 1, uid);     //  Usamos recursividad
-                                }
-                            });
-                        });
-                    } else {    // Si no saltará un error y te notificará la id que ha fallado
-                        getActivity().runOnUiThread(() ->
-                                Toast.makeText(getContext(), "Error al cargar el Pokémon con ID " + id, Toast.LENGTH_SHORT).show()
-                        );
-                    }
-                });
-            });
-        }
-    }
+//    private void llamarPjs(int id, int uid) {   // Método para llamar a la api a traves de metodospjs con el getPersonaje haciendo un call
+//        if (id > uid) {
+//            Toast.makeText(getContext(), "Generado", Toast.LENGTH_SHORT).show();
+//        } else {
+//            MetodosPjs metodospjs = new MetodosPjs();
+//
+//            ExecutorService executor = Executors.newSingleThreadExecutor();
+//            executor.execute(() -> {
+//                metodospjs.getPersonaje((id), personaje -> {    // Usamos el metodo para obtener a los personajes por su id
+//                    if (personaje != null) { //  Si el personaje que agarra no es null entonces genera el personaje
+//                        ExecutorService executordb = Executors.newSingleThreadExecutor();
+//                        executordb.execute(() -> {
+//                            getActivity().runOnUiThread(() -> {
+//                                pjs.add(personaje);     // Añadimos a la lista de personajes el personaje por la id que agarre
+//                                adapter.notifyDataSetChanged(); // Notificamos al adaptador de que la array se ha modificado
+//                                if (generar) {
+//                                    llamarPjs(id + 1, uid);     //  Usamos recursividad
+//                                }
+//                            });
+//                        });
+//                    } else {    // Si no saltará un error y te notificará la id que ha fallado
+//                        getActivity().runOnUiThread(() ->
+//                                Toast.makeText(getContext(), "Error al cargar el Pokémon con ID " + id, Toast.LENGTH_SHORT).show()
+//                        );
+//                    }
+//                });
+//            });
+//        }
+//    }
 
     @Override
     public void onDestroyView() {

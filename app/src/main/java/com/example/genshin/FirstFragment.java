@@ -52,10 +52,10 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         AppDatabase db = AppDatabase.getDatabase(getContext());
 
-        db.getPersonajeDao().getPersonajes().observe(getViewLifecycleOwner(), personajes -> {   // Cuando los datos cambian (es decir, cuando se obtienen los personajes)
-            pjs.clear();  // Limpiamos la lista para evitar duplicados
-            pjs.addAll(personajes);  // Añadimos todos los personajes que tienen
-            adapter.notifyDataSetChanged();  // Le notificamos al adaptador que la lista ha cambiado
+        db.getPersonajeDao().getPersonajes().observe(getViewLifecycleOwner(), personajes -> {
+            pjs.clear();
+            pjs.addAll(personajes);
+            adapter.notifyDataSetChanged();
         });
 
         binding.listaPersonajes.setOnItemClickListener((adapter, fragment, i, l) -> {

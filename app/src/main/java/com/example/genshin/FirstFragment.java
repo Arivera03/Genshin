@@ -57,7 +57,7 @@ public class FirstFragment extends Fragment {
             pjs.addAll(personajes);
             adapter.notifyDataSetChanged();
         });
-
+        //llamarPjs(1,90);
         binding.listaPersonajes.setOnItemClickListener((adapter, fragment, i, l) -> {
             Personaje pj = (Personaje) adapter.getItemAtPosition(i);
             Bundle args = new Bundle();
@@ -74,13 +74,15 @@ public class FirstFragment extends Fragment {
 //            Toast.makeText(getContext(), "Generado", Toast.LENGTH_SHORT).show();
 //        } else {
 //            MetodosPjs metodospjs = new MetodosPjs();
-//
+//            AppDatabase db = AppDatabase.getDatabase(getContext());
 //            ExecutorService executor = Executors.newSingleThreadExecutor();
 //            executor.execute(() -> {
 //                metodospjs.getPersonaje((id), personaje -> {    // Usamos el metodo para obtener a los personajes por su id
 //                    if (personaje != null) { //  Si el personaje que agarra no es null entonces genera el personaje
 //                        ExecutorService executordb = Executors.newSingleThreadExecutor();
+//
 //                        executordb.execute(() -> {
+//                            db.getPersonajeDao().anadirpj(personaje);
 //                            getActivity().runOnUiThread(() -> {
 //                                pjs.add(personaje);     // Añadimos a la lista de personajes el personaje por la id que agarre
 //                                adapter.notifyDataSetChanged(); // Notificamos al adaptador de que la array se ha modificado
